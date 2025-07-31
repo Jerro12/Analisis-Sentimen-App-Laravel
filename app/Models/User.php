@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -90,5 +91,20 @@ class User extends Authenticatable
                 Storage::disk('public')->delete($path);
             }
         }
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * Relasi ke bookmarks (novel-novel yang dibookmark user)
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function bookmarks()
+    {
+        return $this->belongsToMany(Novel::class, 'bookmarks')->withTimestamps();
     }
 }
