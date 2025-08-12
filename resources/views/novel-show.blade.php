@@ -11,7 +11,7 @@
             {{-- Gambar Cover --}}
             @if ($novel->photo)
                 <img src="{{ asset('storage/' . $novel->photo) }}" alt="{{ $novel->title }}"
-                    class="w-full max-h-52 object-contain mb-4 rounded">
+                    class="w-full h-80 object-cover  group-hover:scale-105 transition-transform duration-300">
             @endif
 
             <div class="text-gray-800 space-y-1">

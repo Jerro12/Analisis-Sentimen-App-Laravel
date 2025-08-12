@@ -37,7 +37,7 @@
             class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
             required>
             <option value="">-- Pilih Genre --</option>
-            @foreach (['Fantasi', 'Romansa', 'Petualangan', 'Horor', 'Misteri', 'Fiksi Ilmiah', 'Thriller', 'Drama', 'Komedi', 'Sejarah', 'Aksi', 'Slice of Life', 'Dewasa', 'Anak-anak'] as $genreOption)
+            @foreach (['Fantasi', 'Romansa', 'Petualangan', 'Horor', 'Misteri', 'Fiksi Ilmiah', 'Thriller', 'Drama', 'Komedi', 'Sejarah', 'Aksi', 'Slice of Life', 'Dewasa', 'Anak-anak', 'Fiksi', 'Keluarga'] as $genreOption)
                 <option value="{{ $genreOption }}"
                     {{ old('genre', $novel->genre ?? '') === $genreOption ? 'selected' : '' }}>
                     {{ $genreOption }}

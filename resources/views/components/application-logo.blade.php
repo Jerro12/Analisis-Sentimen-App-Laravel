@@ -1,4 +1,4 @@
-<svg viewBox="0 0 316 316" xmlns="http://www.w3.org/2000/svg" {{ $attributes }}>
+<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" width="150" height="150" {{ $attributes }}>
     <defs>
         <linearGradient id="bookGradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" style="stop-color:#4f46e5" />
@@ -18,7 +18,7 @@
     </defs>
 
     <!-- Main icon container -->
-    <g transform="translate(50, 25)">
+    <g transform="translate(100, 25)">
         <!-- Book -->
         <rect x="10" y="10" width="80" height="100" rx="6" ry="6" fill="url(#bookGradient)"
             filter="url(#shadow)" opacity="0.9" />
@@ -94,9 +94,11 @@
         </g>
     </g>
 
-    <!-- Text "Novelytics" below the icon -->
-    <text x="100" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold"
+    <!-- Text "Novelytics" below the icon - DIKOMENTAR UNTUK NAVBAR -->
+    <!--
+    <text x="150" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold"
         fill="url(#textGradient)">
         Novelytics
     </text>
+    -->
 </svg>

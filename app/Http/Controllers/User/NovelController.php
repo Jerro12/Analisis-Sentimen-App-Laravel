@@ -11,27 +11,33 @@ use Illuminate\Support\Facades\Auth;
 
 
 
+
 class NovelController extends Controller
 {
     public function index(Request $request)
     {
         $query = Novel::query();
 
-        if ($request->filled('search')) {
-            $query->where('title', 'like', '%' . $request->search . '%')
-                ->orWhere('author', 'like', '%' . $request->search . '%');
+        $search = trim($request->search);
+        $showAll = $request->query('show') === 'all';
+
+        if (!empty($search)) {
+            $query->where('title', 'like', '%' . $search . '%')
+                ->orWhere('author', 'like', '%' . $search . '%');
         }
 
-        $novels = $query->latest()->paginate(12)->withQueryString();
+        $novels = $showAll
+            ? $query->latest()->get()
+            : $query->latest()->take(20)->get();
 
-        return view('search', compact('novels'));
+        return view('search', compact('novels', 'search', 'showAll'));
     }
     public function show(Request $request, $id)
     {
         $novel = Novel::findOrFail($id);
         $recommendations = null;
 
-        if (auth()->check()) {
+        if (Auth::check()) {
             $recommendations = $this->getRecommendations($novel);
         }
 
@@ -45,18 +51,19 @@ class NovelController extends Controller
     {
         $user = Auth::user();
 
-        // Ambil komentar terbaru user dengan sentimen yang sudah dianalisis
+        // Ambil komentar user untuk novel ini saja, dengan sentimen yang sudah dianalisis
         $lastComment = $user->comments()
+            ->where('novel_id', $novel->id)
             ->whereNotNull('sentiment')
             ->latest()
             ->first();
 
-        // Kalau tidak ada komentar, kembalikan null
+        // Kalau user belum pernah berkomentar di novel ini, jangan tampilkan rekomendasi
         if (!$lastComment) {
             return null;
         }
 
-        // Ambil novel-novel dengan genre sama, kecuali novel yang sedang dibuka
+        // Ambil novel-novel lain dengan genre sama
         $recommendations = Novel::where('genre', $novel->genre)
             ->where('id', '!=', $novel->id)
             ->latest()
@@ -68,6 +75,7 @@ class NovelController extends Controller
             'novels' => $recommendations,
         ];
     }
+
 
     public function genre($slug)
     {

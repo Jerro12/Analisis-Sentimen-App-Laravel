@@ -33,13 +33,16 @@ class BookmarkController extends Controller
     }
 
     // Hapus secara eksplisit berdasarkan ID bookmark (opsional)
-    public function destroy(Bookmark $bookmark)
+    public function destroy($novelId)
     {
-        if ($bookmark->user_id === Auth::id()) {
-            $bookmark->delete();
+        $user = Auth::user();
+
+        // Pastikan novel ini dibookmark oleh user
+        if ($user->bookmarks()->where('novel_id', $novelId)->exists()) {
+            $user->bookmarks()->detach($novelId);
             return back()->with('success', 'Bookmark dihapus.');
         }
 
-        return back()->with('error', 'Tidak diizinkan.');
+        return back()->with('error', 'Bookmark tidak ditemukan atau bukan milik Anda.');
     }
 }

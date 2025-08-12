@@ -204,17 +204,6 @@ class UserController extends Controller
                 User::whereIn('id', $userIds)->delete();
                 $message = 'Users berhasil dihapus.';
                 break;
-
-                // Untuk future implementation jika ada status active/inactive
-                // case 'activate':
-                //     User::whereIn('id', $userIds)->update(['status' => 'active']);
-                //     $message = 'Users berhasil diaktifkan.';
-                //     break;
-
-                // case 'deactivate':
-                //     User::whereIn('id', $userIds)->update(['status' => 'inactive']);
-                //     $message = 'Users berhasil dinonaktifkan.';
-                //     break;
         }
 
         return redirect()->route('admin.users.index')->with('success', $message);

@@ -24,7 +24,7 @@
                             @php
                                 $photoUrl = !empty($comment->user->profile_photo_url)
                                     ? asset('storage/' . $comment->user->profile_photo_url)
-                                    : asset('default-avatar.png');
+                                    : asset('images/default-avatar.png');
                             @endphp
 
                             <img src="{{ $comment->user->profile_photo }}" alt="Foto {{ $comment->user->name }}"

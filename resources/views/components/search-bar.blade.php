@@ -1,7 +1,7 @@
 <form action="{{ route('search') }}" method="GET" class="w-full max-w-xl mx-auto mb-6">
     <label for="search" class="sr-only">Search</label>
     <div class="relative">
-        <input type="text" name="query" id="search"
+        <input type="text" name="search" id="search" value="{{ request('search') }}"
             class="w-full py-2 pl-10 pr-4 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-200 focus:outline-none"
             placeholder="Cari novel favoritmu...">
         <div class="absolute inset-y-0 left-0 flex items-center pl-3">

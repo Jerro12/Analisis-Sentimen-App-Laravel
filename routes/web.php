@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\Admin\NovelController as AdminNovelController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\User\NovelController as UserNovelController;
 use App\Http\Controllers\User\CommentController as UserCommentController;
 use App\Http\Controllers\HomeController;
@@ -44,7 +45,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Bookmark routes
     Route::get('/bookmarks', [BookmarkController::class, 'index'])->name('bookmarks.index');
     Route::post('/bookmark/toggle', [BookmarkController::class, 'toggle'])->name('bookmark.toggle');
-    Route::delete('/bookmarks/{bookmark}', [BookmarkController::class, 'destroy'])->name('bookmarks.destroy');
+    Route::delete('/bookmarks/{novel}', [BookmarkController::class, 'destroy'])->name('bookmarks.destroy');
 });
 // =====================
 // Route untuk Authenticated User
@@ -61,8 +62,8 @@ Route::middleware(['auth'])->group(function () {
 // Admin Routes (Hanya Admin Bisa Akses)
 // =====================
 // Dashboard admin
-Route::get('/admin/dashboard', fn() => view('admin.dashboard'))
-    ->middleware(['auth', 'admin']) // tambahkan 'admin' agar hanya admin bisa akses
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'admin']) // hanya admin yang bisa akses
     ->name('admin.dashboard');
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     // Manajemen Comment

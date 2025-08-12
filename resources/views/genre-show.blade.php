@@ -10,7 +10,7 @@
             @forelse ($novels as $novel)
                 <a href="{{ route('novel.show', $novel->id) }}"
                     class="bg-white rounded-lg shadow hover:shadow-md transition overflow-hidden">
-                    <img src="{{ $novel->cover_photo }}" alt="{{ $novel->title }}"
+                    <img src="{{ asset('storage/' . $novel->photo) }}" alt="{{ $novel->title }}"
                         class="w-full h-48 object-cover rounded-t-lg">
                     <div class="p-3">
                         <h4 class="text-sm font-bold text-gray-800">{{ $novel->title }}</h4>

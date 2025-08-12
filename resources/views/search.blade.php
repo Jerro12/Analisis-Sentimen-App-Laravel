@@ -12,7 +12,7 @@
         {{-- 📚 Grid Semua Novel --}}
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 mt-6">
             @forelse ($novels as $novel)
-                {{-- Link ke detail novel --}}
+                {{-- Kartu novel --}}
                 <a href="{{ route('novel.show', $novel->id) }}" class="block">
                     <div class="bg-white shadow rounded-lg overflow-hidden hover:shadow-lg transition duration-300">
                         @if ($novel->photo)
@@ -34,5 +34,14 @@
             @endforelse
         </div>
 
+        {{-- Tombol Lihat Semua --}}
+        @if (!$showAll && $novels->count() >= 20)
+            <div class="text-center mt-8">
+                <a href="{{ route('search', array_merge(request()->query(), ['show' => 'all'])) }}"
+                    class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition">
+                    Lihat Semua Novel
+                </a>
+            </div>
+        @endif
     </div>
 </x-app-layout>

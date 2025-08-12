@@ -1,0 +1,142 @@
+/* Custom styling untuk Swiper pagination */
+.swiper-pagination {
+    position: relative !important;
+    margin-top: 1.5rem;
+}
+
+.swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background: #d1d5db;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+    background: #3b82f6;
+    transform: scale(1.2);
+}
+
+.swiper-pagination-bullet:hover {
+    background: #6b7280;
+    transform: scale(1.1);
+}
+
+/* Styling untuk novel cards dalam carousel */
+.novel-swiper .swiper-slide {
+    height: auto;
+    padding: 0;
+}
+
+/* Responsive adjustments untuk mobile */
+@media (max-width: 768px) {
+    .novel-swiper .swiper-slide .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 0.75rem;
+    }
+}
+
+/* Custom styling untuk Recommendation Swiper */
+.recommendation-swiper {
+    position: relative;
+    padding: 0 2rem;
+    overflow: hidden; /* Penting untuk mencegah layout shift */
+    min-height: 200px; /* Minimum height untuk stability */
+}
+
+.recommendation-swiper .swiper-wrapper {
+    align-items: stretch; /* Pastikan semua slide sama tinggi */
+}
+
+.recommendation-swiper .swiper-slide {
+    height: auto;
+    display: flex; /* Pastikan content mengisi tinggi penuh */
+}
+
+.recommendation-swiper .swiper-slide > a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Custom Navigation Buttons untuk Recommendation */
+.recommendation-next,
+.recommendation-prev {
+    width: 32px !important;
+    height: 32px !important;
+    margin-top: -16px !important;
+    background: #ffffff !important;
+    border: 2px solid #e5e7eb !important;
+    border-radius: 50% !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease !important;
+    z-index: 10 !important;
+}
+
+.recommendation-next:hover,
+.recommendation-prev:hover {
+    background: #3b82f6 !important;
+    border-color: #3b82f6 !important;
+    transform: scale(1.1) !important;
+}
+
+.recommendation-next::after,
+.recommendation-prev::after {
+    font-size: 12px !important;
+    font-weight: bold !important;
+    color: #6b7280 !important;
+}
+
+.recommendation-next:hover::after,
+.recommendation-prev:hover::after {
+    color: #ffffff !important;
+}
+
+.recommendation-next {
+    right: 0 !important;
+}
+
+.recommendation-prev {
+    left: 0 !important;
+}
+
+/* Custom Pagination untuk Recommendation */
+.recommendation-pagination {
+    position: relative !important;
+    margin-top: 1rem !important;
+}
+
+.recommendation-pagination .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background: #d1d5db;
+    margin: 0 3px;
+}
+
+.recommendation-pagination .swiper-pagination-bullet-active {
+    background: #3b82f6;
+}
+
+/* Hide navigation on mobile untuk recommendation swiper */
+@media (max-width: 768px) {
+    .recommendation-swiper {
+        padding: 0;
+    }
+
+    .recommendation-next,
+    .recommendation-prev {
+        display: none !important;
+    }
+}
+
+/* Force visibility untuk troubleshooting */
+.recommendation-swiper.swiper-initialized {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Preload state untuk mencegah flash */
+.recommendation-swiper:not(.swiper-initialized) {
+    opacity: 0.7;
+}
